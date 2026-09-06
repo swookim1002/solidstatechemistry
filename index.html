@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solid-State Chemistry Laboratory — Sun Woo Kim, Chosun University</title>
+<meta name="description" content="Solid-State Chemistry Laboratory of Sun Woo Kim, Chosun University. Mineral-inspired mixed-metal oxides and halides: hydrothermal synthesis, crystal growth, and structure–property relationships in polar, magnetic and photocatalytic materials.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ECEDE7;
+  --paper-2:#E3E5DD;
+  --ink:#1F2A2C;
+  --muted:#5C6664;
+  --rule:#CBCFC5;
+  --fluoride:#5E8A6E;
+  --oxide:#6A4A7C;
+  --photo:#A9702F;
+  --coord:#A56A73;
+  --ree:#3C6E82;
+  --measure:64ch;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Spectral",Georgia,serif;
+  font-weight:400;
+  font-size:17px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--ink)}
+a:focus-visible,button:focus-visible,summary:focus-visible{
+  outline:2px solid var(--oxide);outline-offset:3px;border-radius:2px}
+h1,h2,h3{font-weight:500;letter-spacing:-.012em;margin:0}
+p{margin:0 0 1em}
+p:last-child{margin-bottom:0}
+
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+
+/* ---------- top bar ---------- */
+.bar{
+  position:sticky;top:0;z-index:20;
+  background:rgba(236,237,231,.93);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--rule);
+}
+.bar .wrap{display:flex;align-items:center;gap:20px;height:52px}
+.bar nav{display:flex;gap:18px;flex-wrap:wrap;margin-left:auto}
+.bar a,.bar button{
+  font-family:"Archivo",system-ui,sans-serif;
+  font-size:13.5px;letter-spacing:.01em;border:0;background:none;
+  color:var(--muted);cursor:pointer;padding:4px 0;
+}
+.bar a:hover,.bar button:hover{color:var(--ink)}
+.sig{font-family:"Archivo",sans-serif;font-size:13.5px;font-weight:600;color:var(--ink);border:0}
+#lang{font-weight:600;color:var(--ink);border:1px solid var(--rule);border-radius:2px;padding:3px 8px}
+
+/* ---------- hero ---------- */
+.hero{padding:64px 0 56px;border-bottom:1px solid var(--rule)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:48px;align-items:start}
+.hero h1{font-size:clamp(2.5rem,6vw,3.9rem);line-height:1.02;font-weight:400;letter-spacing:-.025em}
+.hero h1 .ko{display:block;font-size:.36em;letter-spacing:.06em;color:var(--muted);margin-top:.7em;font-weight:400}
+.role{margin:24px 0 0;font-size:1.06rem;max-width:var(--measure)}
+.role .affil{color:var(--muted)}
+.lede{margin-top:22px;max-width:var(--measure);font-size:1.06rem}
+.hero-figure{margin:0}
+.hero-figure svg{width:100%;height:auto;display:block}
+.hero-figure figcaption{
+  font-family:"Archivo",sans-serif;font-size:12px;line-height:1.5;
+  color:var(--muted);margin-top:12px;max-width:34ch}
+
+/* ---------- section scaffold ---------- */
+section{padding:56px 0;border-bottom:1px solid var(--rule)}
+.sec{display:grid;grid-template-columns:184px minmax(0,1fr);gap:48px;align-items:start}
+.sec > h2{
+  font-family:"Archivo",sans-serif;font-size:13.5px;font-weight:600;
+  letter-spacing:.02em;color:var(--muted);padding-top:.55em;
+  position:sticky;top:72px}
+.body{max-width:var(--measure)}
+.body.wide{max-width:none}
+
+/* ---------- research threads ---------- */
+.thread{padding:0 0 26px;margin-bottom:26px;border-bottom:1px solid var(--rule)}
+.thread:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.thread h3{font-size:1.32rem;line-height:1.25;display:flex;gap:12px;align-items:baseline}
+.node{flex:0 0 auto;width:9px;height:9px;border-radius:50%;transform:translateY(-2px)}
+.n-f{background:var(--fluoride)} .n-o{background:var(--oxide)}
+.n-p{background:var(--photo)}   .n-c{background:var(--coord)}
+.n-r{background:var(--ree)}
+.n-m{background:transparent;border:2px solid var(--ink)}
+.thread p{margin-top:.6em}
+.thread .keys{font-family:"Archivo",sans-serif;font-size:12.5px;color:var(--muted);margin-top:.8em}
+
+/* ---------- publications ---------- */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.chip{
+  font-family:"Archivo",sans-serif;font-size:12.5px;
+  border:1px solid var(--rule);background:transparent;color:var(--muted);
+  padding:5px 11px;border-radius:20px;cursor:pointer;
+  transition:background .18s ease,color .18s ease,border-color .18s ease;
+  display:inline-flex;align-items:center;gap:7px}
+.chip .node{width:7px;height:7px;transform:none}
+.chip:hover{color:var(--ink);border-color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+ol.pubs{list-style:none;margin:0;padding:0;counter-reset:pub}
+ol.pubs li{
+  position:relative;padding:0 0 14px 26px;margin-bottom:14px;
+  border-bottom:1px solid var(--rule);font-size:.95rem;line-height:1.55}
+ol.pubs li:last-child{border-bottom:0}
+ol.pubs li::before{
+  content:"";position:absolute;left:4px;top:.62em;
+  width:8px;height:8px;border-radius:50%;background:var(--rule)}
+li[data-cat="fluoride"]::before{background:var(--fluoride)}
+li[data-cat="oxide"]::before{background:var(--oxide)}
+li[data-cat="photo"]::before{background:var(--photo)}
+li[data-cat="coord"]::before{background:var(--coord)}
+li.hide{display:none}
+ol.pubs .j{font-style:italic}
+ol.pubs .yr{font-family:"Archivo",sans-serif;font-size:12.5px;color:var(--muted)}
+ol.pubs strong{font-weight:600}
+.pub-note{font-size:.9rem;color:var(--muted);margin-top:20px}
+
+/* ---------- lists / tables ---------- */
+details{border-top:1px solid var(--rule);margin-top:20px;padding-top:14px}
+summary{
+  cursor:pointer;font-family:"Archivo",sans-serif;font-size:13px;color:var(--muted);
+  list-style:none;display:flex;align-items:center;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";font-size:15px;line-height:1;width:12px}
+details[open] summary::before{content:"–"}
+summary:hover{color:var(--ink)}
+table{width:100%;border-collapse:collapse;margin-top:16px;font-size:.9rem}
+th{
+  text-align:left;font-family:"Archivo",sans-serif;font-size:12px;font-weight:600;
+  color:var(--muted);padding:0 12px 7px 0;border-bottom:1px solid var(--rule)}
+td{padding:7px 12px 7px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+td:last-child,th:last-child{padding-right:0;color:var(--muted);white-space:nowrap}
+
+.facts{margin:0;padding:0}
+.facts div{
+  display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;
+  padding:9px 0;border-bottom:1px solid var(--rule);font-size:.95rem}
+.facts div:last-child{border-bottom:0}
+.facts dt{font-family:"Archivo",sans-serif;font-size:12.5px;color:var(--muted);padding-top:.28em}
+.facts dd{margin:0}
+
+.stack > * + *{margin-top:22px}
+.card{
+  background:var(--paper-2);border:1px solid var(--rule);
+  padding:22px 24px;font-size:.97rem}
+.card h3{font-size:1.06rem;margin-bottom:.45em}
+
+footer{padding:38px 0 60px;font-size:.86rem;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+@media (max-width:820px){
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .hero-figure{order:-1;max-width:260px}
+  .sec{grid-template-columns:1fr;gap:18px}
+  .sec > h2{position:static;padding-top:0}
+  .facts div{grid-template-columns:1fr;gap:2px}
+  .bar nav{gap:14px}
+  .bar .sig{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap">
+    <a class="sig" href="#top" data-ko="고체화학 연구실">Solid-State Chemistry Lab</a>
+    <nav>
+      <a href="#research" data-ko="연구">Research</a>
+      <a href="#publications" data-ko="논문">Publications</a>
+      <a href="#group" data-ko="연구실">Group</a>
+      <a href="#teaching" data-ko="강의">Teaching</a>
+      <a href="#contact" data-ko="연락처">Contact</a>
+      <button id="lang" type="button" aria-label="Switch language">한국어</button>
+    </nav>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <h1><span data-ko="고체화학 연구실">Solid-State Chemistry Laboratory</span><span class="ko" data-ko="Solid-State Chemistry Laboratory">고체화학 연구실</span></h1>
+      <p class="role">
+        <span data-ko="조선대학교 화학교육과">Department of Chemistry Education, Chosun University</span><br>
+        <span class="affil" data-ko="연구책임자 김선우 부교수 · 2026–27년 휴스턴대학교 화학과 방문학자">Sun Woo Kim, principal investigator · Visiting Scholar, Department of Chemistry, University of Houston, 2026–27</span>
+      </p>
+      <p class="lede" data-ko="광물이 이미 안정하다고 증명한 구조를 출발점으로 삼아, 그 골격에 새로운 금속 조합을 넣어 자연에는 없는 혼합금속 산화물과 할라이드를 만듭니다. 직접 결정을 키우고, 구조를 풀고, 그 배열이 왜 특정한 자기적·광학적 성질을 만드는지 밝힙니다.">
+        We start from structures that minerals have already proved to be stable, put new
+        combinations of metals into those frameworks, and get mixed-metal oxides and halides that
+        do not occur in nature. We grow the crystals, solve the structures, and work out why a
+        particular arrangement of atoms produces a particular magnetic or optical response.
+      </p>
+    </div>
+
+    <figure class="hero-figure">
+      <svg id="lattice" viewBox="0 0 300 300" role="img"
+           aria-label="Drawing of a honeycomb layer with two alternating cation sites, the structural motif behind the group's layered tellurates and fluorides."></svg>
+      <figcaption data-ko="B/B′ 두 양이온이 규칙적으로 배열된 벌집형 층. 이 배열이 반전 대칭을 깨뜨려 비중심대칭 구조가 만들어집니다.">
+        A honeycomb layer with two alternating cation sites. When those sites order,
+        the inversion symmetry of the parent structure breaks.
+      </figcaption>
+    </figure>
+  </div>
+</header>
+
+<section id="research">
+  <div class="wrap sec">
+    <h2 data-ko="연구">Research</h2>
+    <div class="body">
+
+      <div class="thread">
+        <h3><span class="node n-m"></span><span data-ko="광물에서 출발한 새로운 혼합금속 산화물·할라이드">Mineral-inspired mixed-metal oxides and halides</span></h3>
+        <p data-ko="새로운 물질을 백지에서 설계하는 일은 대개 실패합니다. 대신 우리는 광물이 이미 안정하다고 증명해 둔 골격 — 페로브스카이트(CaTiO₃), 파이로클로어(A₂B₂O₇), 자를라이트(NaSr₃Al₃F₁₆), 아이스카이나이트(CaTa₂O₆형), 로시아이트(PbSb₂O₆) — 을 출발점으로 삼습니다. 골격은 그대로 두고 그 안의 금속 자리를 바꾸거나 규칙적으로 배열시키면, 자연에는 존재하지 않는 조성이면서도 구조적으로는 안정한 물질을 얻을 수 있습니다.">
+          Designing a new solid from a blank page usually fails. We start instead from frameworks
+          that minerals have already proved stable — perovskite (CaTiO₃), pyrochlore (A₂B₂O₇),
+          jarlite (NaSr₃Al₃F₁₆), aeschynite (CaTa₂O₆-type) and rosiaite (PbSb₂O₆) — and change
+          what sits on the metal sites, or order what is already there. The composition becomes
+          something nature never made; the framework stays sound.
+        </p>
+        <p data-ko="이 접근이 우리 연구의 공통 축입니다. 자를라이트형 Ba₁₄Li₁.₈₇Mn₁₄.₁₃F₆₈, 파이로클로어 관련 RbFe²⁺Fe³⁺F₆, 양이온 결손 층상 페로브스카이트 K₄Fe₃F₁₂, 아이스카이나이트형 YCrWO₆와 LuCrWO₆, PbSb₂O₆형 벌집 텔루레이트가 모두 같은 방법에서 나왔습니다. 아래 네 갈래는 이 축을 각각 다른 물질군에서 밀고 나간 것입니다.">
+          This is the through-line of everything below. Jarlite-related Ba₁₄Li₁.₈₇Mn₁₄.₁₃F₆₈,
+          pyrochlore-related RbFe²⁺Fe³⁺F₆, the cation-deficient layered perovskite K₄Fe₃F₁₂,
+          aeschynite-type YCrWO₆ and LuCrWO₆, and the PbSb₂O₆-type honeycomb tellurates all come
+          out of it. The four threads that follow are the same idea pushed through different
+          families of material.
+        </p>
+      </div>
+
+      <div class="thread">
+        <h3><span class="node n-f"></span><span data-ko="불화물과 혼합금속 할라이드">Fluorides and mixed-metal halides</span></h3>
+        <p data-ko="불소는 작고 전기음성도가 크며 1가인 음이온입니다. 그래서 금속의 높은 산화 상태를 안정화하고, 열린 저차원 골격을 만들며, 다리 결합보다 말단 배위를 선호해 산화물에서는 잘 나오지 않는 비대칭·극성 단위를 자연스럽게 만들어 냅니다. 다루기 까다로운 만큼 아직 덜 탐색된 영역이기도 합니다.">
+          Fluoride is a small, highly electronegative, monovalent anion. It stabilises high
+          oxidation states, builds open low-dimensional frameworks, and prefers terminal over
+          bridging coordination, which yields the acentric, polar building units that oxides
+          rarely form on their own. It is a demanding chemistry, and correspondingly underexplored.
+        </p>
+        <p data-ko="불화물 합성은 오랫동안 HF나 F₂ 가스에 의존해 왔고, 그래서 다룰 수 있는 조성이 크게 제한되었습니다. 우리는 묽은 CF₃COOH나 HBF₄를 쓰는 온화한 수열 합성법을 확립했습니다. 진한 불산 없이도 같은 물질군에 접근할 수 있고, 훈련받은 학부생이 직접 다룰 수 있는 안전 범위 안에 들어옵니다. 이 방법으로 BaMF₄ 다강체 계열을 상순수하게 얻었고 RbFe²⁺Fe³⁺F₆, K₄Fe₃F₁₂ 같은 전하정렬 자성 불화물을 새로 찾아냈습니다.">
+          Fluoride synthesis has long depended on HF or F₂ gas, which sharply limits the
+          compositions anyone can reach. We use mild hydrothermal routes with dilute CF₃COOH or
+          HBF₄ instead — the same families remain accessible without concentrated hydrofluoric
+          acid, and within a safety envelope a trained undergraduate can work in. The route gives
+          phase-pure multiferroic BaMF₄ and has produced new charge-ordered magnetic fluorides
+          such as RbFe²⁺Fe³⁺F₆ and K₄Fe₃F₁₂.
+        </p>
+        <p data-ko="현재는 비선형 광학용 혼합금속 할라이드를 찾고 있고 (한국연구재단 지원, 2022–), 상선택적 수열 합성으로 얻은 지르코늄 하이드록시플루오라이드 Zr₃(OH)₂F₁₀의 구조와 복굴절을 정리하고 있습니다. M²⁺AlF₅(H₂O)₇(M = Fe, Co, Ni) 계열은 온도에 따라 단사정 C2/m과 삼사정 P-1을 오가는 다형성을 보이는데, 양이온 크기와 d 전자 배치가 어느 다형을 고르게 하는지를 다른 금속 조합으로 넓혀 확인하려 합니다.">
+          Current work looks for mixed-metal halides with nonlinear optical response (NRF, 2022–)
+          and is writing up Zr₃(OH)₂F₁₀, a zirconium hydroxyfluoride from phase-selective
+          hydrothermal synthesis whose structure gives it moderate birefringence. The
+          M²⁺AlF₅(H₂O)₇ series (M = Fe, Co, Ni) switches between a monoclinic C2/m form at room
+          temperature and a triclinic P-1 form at 100 K; extending it to other metal combinations
+          should show how cation size and d-electron count decide which polymorph wins.
+        </p>
+        <p class="keys" data-ko="수열합성 · 단결정 X-선 회절 · 자화 측정 · 중성자 분말 회절 · 이차조화파 발생">
+          Hydrothermal synthesis · single-crystal XRD · magnetometry · neutron powder diffraction ·
+          second-harmonic generation
+        </p>
+      </div>
+
+      <div class="thread">
+        <h3><span class="node n-o"></span><span data-ko="극성·자성 산화물과 다강체">Polar and magnetic oxides, and multiferroics</span></h3>
+        <p data-ko="강유전성과 (반)강자성이 한 물질 안에 동시에 존재하면 자기장으로 전기 분극을 바꾸거나 그 반대가 가능해집니다. 저전력 비휘발성 메모리와 자기전기 센서가 여기에 걸려 있습니다. 문제는 강유전성이 비중심대칭 공간군을 요구하고 자기 질서는 짝짓지 않은 d·f 전자와 적절한 교환 경로를 요구한다는 점이라, 둘을 한 상에 담은 계열은 BiFeO₃, LuFe₂O₄ 정도로 아직 손에 꼽습니다.">
+          Ferroelectricity and (anti)ferromagnetism in the same phase would let a magnetic field
+          switch an electric polarisation, or the reverse — the basis for low-power non-volatile
+          memory and magnetoelectric sensing. The difficulty is that ferroelectricity demands a
+          non-centrosymmetric space group while magnetic order demands unpaired d or f spins with
+          a workable exchange pathway. Few families manage both; BiFeO₃ and LuFe₂O₄ are most of
+          the established list.
+        </p>
+        <p data-ko="우리 접근은 이렇습니다. 입체화학적으로 활성인 고립 전자쌍이나 크기가 어긋난 양이온을 품은 중심대칭 모체 구조에서 출발해, 화학적 치환이나 양이온 규칙 배열로 반전 대칭을 깨면서 자성 부격자는 남기거나 새로 넣습니다. 로시아이트(PbSb₂O₆) 계열에서 비중심대칭 벌집형 텔루레이트 A(II)GeTeO₆, PbMnTeO₆, BiM(III)TeO₆가, 아이스카이나이트형(CaTa₂O₆형) 골격에서 고압·고온 합성으로 극성 자성체 YCrWO₆와 LuCrWO₆가 이렇게 나왔습니다. 다음 목표는 아직 이 골격들에 들어가 본 적 없는 1주기 전이금속(Mn³⁺, Fe³⁺, Cr³⁺)을 텔루레이트와 안티모네이트에 넣어 보는 것입니다.">
+          The approach is to start from a centrosymmetric parent containing a stereochemically
+          active lone pair or a size-mismatched cation, then break inversion symmetry by chemical
+          substitution or cation ordering while keeping or introducing a magnetic sublattice.
+          Rosiaite (PbSb₂O₆) gave the noncentrosymmetric honeycomb tellurates A(II)GeTeO₆,
+          PbMnTeO₆ and BiM(III)TeO₆; high-pressure, high-temperature synthesis in the aeschynite
+          (CaTa₂O₆-type) framework gave the polar magnets YCrWO₆ and LuCrWO₆. Next are first-row
+          transition metals — Mn³⁺, Fe³⁺, Cr³⁺ — in tellurate and antimonate frameworks that have
+          not yet hosted them.
+        </p>
+        <p data-ko="합성은 계산과 함께 갑니다. Bi₆Te₂O₁₅와 K₀.₈₂Tl₁.₁₈MoP₂O₉에서 제일원리(DFT) 계산으로 전자·광학적 성질을 함께 다뤘고, 준비 중인 폴리옥소메탈레이트 논문에서도 단결정 구조 결정과 전자구조 계산, 이차조화파 측정을 묶어 쓰고 있습니다. 데이터가 쌓이면 유망한 조성과 합성 조건을 미리 걸러 내는 기계학습 모형으로 확장할 계획입니다.">
+          Synthesis runs alongside computation. First-principles (DFT) calculations carried the
+          electronic and optical analysis for Bi₆Te₂O₁₅ and K₀.₈₂Tl₁.₁₈MoP₂O₉, and the
+          polyoxometalate manuscript in preparation pairs single-crystal structure determination
+          with electronic-structure calculation and SHG measurement. As the group's own data
+          accumulate, the plan is to use machine-learning models to screen candidate compositions
+          and synthesis conditions before going to the bench.
+        </p>
+        <p class="keys" data-ko="고상반응 · 고압 합성 · 방사광 분말 회절 · 리트벨트 정밀화 · 이차조화파 발생 · 압전응답력 현미경 · DFT">
+          Solid-state and high-pressure synthesis · synchrotron powder diffraction · Rietveld
+          refinement · second-harmonic generation · piezoresponse force microscopy · DFT
+        </p>
+      </div>
+
+      <div class="thread">
+        <h3><span class="node n-p"></span><span data-ko="가시광 광촉매 — 태양광 수소와 환경 정화">Visible-light photocatalysis, for solar fuels and clean air</span></h3>
+        <p data-ko="졸–겔 합성 조건 — pH, 하소 온도, 산 촉매, 도핑 — 이 아나타제 순도와 입자 크기를 결정하고, 그것이 곧 광촉매 성능으로 이어집니다. 최적화한 TiO₂는 상용 P25보다 높은 NOx 분해 효율을 보였고, 같은 조성을 시멘트와 모르타르에 넣어 대기 정화와 CO₂ 흡수를 함께 노리는 건설 재료로도 확장했습니다.">
+          Sol–gel parameters — pH, calcination temperature, acid catalyst, dopants — set the
+          anatase purity and particle size that determine photocatalytic performance. Optimised
+          titania outperformed commercial P25 in NO<sub>x</sub> degradation, and the same
+          compositions carry over into cementitious materials that clean air and take up CO₂.
+        </p>
+        <p data-ko="이 계열 전체의 한계는 분명합니다. TiO₂를 포함해 잘 알려진 광촉매 대부분이 자외선에서만 제대로 작동하는데, 자외선은 태양 스펙트럼의 몇 퍼센트에 지나지 않습니다. 그래서 흡수 끝을 가시광으로 밀어내되 촉매 활성은 유지하는 조성을 체계적으로 찾고 있습니다. 전이금속·비금속 도핑과 좁은 밴드갭 반도체와의 고용체 형성을, 티타네이트·텅스테이트·전이금속 옥시나이트라이드와 설파이드 같은 여러 모체 격자에 걸쳐 비교합니다.">
+          The limitation across this whole field is plain: TiO₂ and most other established
+          photocatalysts work properly only under ultraviolet light, which is a few percent of the
+          solar spectrum. So the work now is to push the absorption edge into the visible while
+          keeping the catalytic activity — transition-metal and non-metal doping, and solid
+          solutions with narrower-gap semiconductors, compared across host lattices: titanates,
+          tungstates, transition-metal oxynitrides and sulfides.
+        </p>
+        <p data-ko="성능은 두 가지로 평가합니다. 모델 휘발성 유기화합물(아세트알데하이드, 톨루엔)의 분해를 기체 크로마토그래피로 추적하는 방법과, 모의 태양광 아래 수용액에서 수소 발생을 측정하는 방법입니다. 앞쪽은 학부생이 한 학기에 완결할 수 있는 크기라 대개 여기서 시작합니다. 목표는 도핑 조성과 밴드갭, 광촉매 활성 사이의 정량적 관계를 세우는 것입니다.">
+          Performance is measured two ways: degradation of a model volatile organic compound —
+          acetaldehyde or toluene — followed by gas chromatography, and hydrogen evolution from
+          aqueous solution under simulated sunlight. The first is a semester-sized project, so
+          students usually start there. The goal is a quantitative relationship between dopant
+          composition, band gap and activity.
+        </p>
+        <p class="keys" data-ko="졸–겔 합성 · 볼밀링 · BET 비표면적 · 확산반사 UV–Vis (Tauc 분석) · XPS · 기체 크로마토그래피 · 가속 탄산화 시험">
+          Sol–gel synthesis · ball milling · BET · diffuse-reflectance UV–Vis with Tauc analysis ·
+          XPS · gas chromatography · accelerated carbonation testing
+        </p>
+      </div>
+
+      <div class="thread">
+        <h3><span class="node n-r"></span><span data-ko="폐자원에서 회수한 희토류로 만드는 기능성 물질">Functional materials from recovered rare earths</span></h3>
+        <p data-ko="연구실에서 가장 새로운 방향입니다. 희토류는 전자기기, 영구자석, 형광체에 없어서는 안 되는데 공급은 지리적으로 몰려 있고 가격은 크게 흔들립니다. 그래서 폐형광등 형광체 분말과 수명이 다한 NdFeB 자석에서 희토류를 되찾으려는 시도가 빠르게 늘고 있습니다.">
+          This is the group's newest direction. Rare earths are indispensable to electronics,
+          permanent magnets and phosphors, yet supply is geographically concentrated and prices
+          swing hard — which is why recovery from spent fluorescent-lamp phosphor powder and
+          end-of-life NdFeB magnets is growing so quickly.
+        </p>
+        <p data-ko="우리는 폐자원을 재활용 대상이 아니라 합성 원료로 봅니다. 산 침출로 얻은 희토류 용액을 단일 원소 산화물까지 정제하지 않고 그대로 금속원으로 써서, 카복실레이트와 포스포네이트 리간드와 함께 수열·용매열 합성으로 새로운 희토류 배위고분자와 금속–유기 골격체를 만듭니다. 회수 용액은 대개 여러 란타넘족이 섞여 있는데, 바로 그 혼합이 단일 원소로는 얻을 수 없는 발광·자기 특성을 줄 수 있는지가 흥미로운 질문입니다.">
+          We treat the waste as a synthetic feedstock rather than a recycling target. The
+          acid-leached rare-earth solution goes straight into hydrothermal or solvothermal
+          synthesis with carboxylate and phosphonate linkers — no purification to single-element
+          oxides first — to build new rare-earth coordination polymers and metal–organic
+          frameworks. Recovery usually gives a mixed-lanthanide solution, and the interesting
+          question is whether that mixture yields luminescent or magnetic behaviour a
+          single-lanthanide analogue cannot.
+        </p>
+        <p data-ko="Eu³⁺, Tb³⁺, Dy³⁺는 그 자체로 발광하므로, 만들어진 물질은 광발광 여기·방출 분광으로 색순도와 양자수율을 재어 형광체 후보로 검토합니다. 형광체를 되찾겠다는 출발점이 다시 형광체라는 결과로 돌아오는 셈입니다. 우선은 폐자원에서 쓸 만한 희토류 산화물을 안정적으로 회수하는 단계까지를 학부생이 완결할 수 있는 과제로 잡고 있습니다.">
+          Eu³⁺, Tb³⁺ and Dy³⁺ luminesce in their own right, so the products are screened as
+          phosphors by photoluminescence excitation and emission spectroscopy for colour purity
+          and quantum yield — the motivation for recovering phosphor-grade rare earths returning
+          as the application. The first milestone, sized for an undergraduate to finish, is
+          reliable recovery of usable rare-earth oxide from the waste itself.
+        </p>
+        <p class="keys" data-ko="산 침출 · 선택적 침전 · 수열·용매열 합성 · 분말 XRD · FT-IR · SEM/EDX · 열중량 분석 · 광발광 분광">
+          Acid leaching · selective precipitation · hydrothermal and solvothermal synthesis ·
+          powder XRD · FT-IR · SEM/EDX · thermogravimetric analysis · photoluminescence spectroscopy
+        </p>
+      </div>
+
+      <details>
+        <summary data-ko="현재 준비 중인 논문">Manuscripts in preparation</summary>
+        <p style="margin-top:14px">
+          Zr₃(OH)₂F₁₀ — phase-selective hydrothermal synthesis, crystal structure and
+          moderate birefringence of a zirconium hydroxyfluoride.
+        </p>
+        <p>
+          Tl₃Mo₁₂PO₄₀ and Tl₄Mo₅P₂O₂₂ — centrosymmetric and noncentrosymmetric polyoxometalate
+          clusters: structure, electronic structure calculation and second-harmonic generation.
+        </p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="wrap sec">
+    <h2 data-ko="논문">Publications</h2>
+    <div class="body wide">
+      <p class="body" style="margin-bottom:22px" data-ko="선별한 33편입니다. 색점은 물질 계열을 나타냅니다.">
+        Thirty-three selected papers. The coloured marker gives the material family.
+      </p>
+
+      <div class="filters" role="group" aria-label="Filter publications by material family">
+        <button class="chip" data-filter="all" aria-pressed="true" data-ko="전체">All</button>
+        <button class="chip" data-filter="fluoride" aria-pressed="false"><span class="node n-f"></span><span data-ko="불화물·할라이드">Fluorides &amp; halides</span></button>
+        <button class="chip" data-filter="oxide" aria-pressed="false"><span class="node n-o"></span><span data-ko="산화물·텔루레이트">Oxides &amp; tellurates</span></button>
+        <button class="chip" data-filter="photo" aria-pressed="false"><span class="node n-p"></span><span data-ko="광촉매·환경">Photocatalysis &amp; environment</span></button>
+        <button class="chip" data-filter="coord" aria-pressed="false"><span class="node n-c"></span><span data-ko="배위화학">Coordination chemistry</span></button>
+      </div>
+
+      <ol class="pubs" id="publist">
+        <li data-cat="photo">Lim, H.-S.; <strong>Kim, S.-W.</strong>; Kuppusamy, M.; Muthu, S.; Kim, W.-J. Influence of synthesis and optimization parameters on NO<sub>x</sub> degradation performance of TiO₂ nanoparticles via sol–gel method. <span class="j">J. Phys. Chem. Solids</span> <span class="yr">2026, 208, 113005.</span></li>
+        <li data-cat="fluoride"><strong>Kim, S. W.</strong>; Chang, H. Y. Crystal structure of a new lead iron fluoride trihydrate, Pb₁.₅Fe₃F₁₂·3H₂O. <span class="j">Z. Kristallogr. – New Cryst. Struct.</span> <span class="yr">2026, ahead of print.</span></li>
+        <li data-cat="oxide">Chang, H. Y.; <strong>Kim, S. W.</strong> Crystal structure of a potassium thallium molybdenum diphosphate, K₀.₈₂Tl₁.₁₈MoP₂O₉. <span class="j">Z. Kristallogr. – New Cryst. Struct.</span> <span class="yr">2026, ahead of print.</span></li>
+        <li data-cat="fluoride">Chang, H. Y.; <strong>Kim, S. W.</strong> Crystal structure of new barium lithium manganese fluorides: Ba₁₄Li₁.₈₇Mn₁₄.₁₃F₆₈ with a jarlite-related structure. <span class="j">Z. Kristallogr. – New Cryst. Struct.</span> <span class="yr">2025, 240 (2), 279.</span></li>
+        <li data-cat="photo">Kim, T.-H.; Kuppusamy, M.; Velmurugan, K.; Park, S.-D.; <strong>Kim, S.-W.</strong>; Park, S.-S.; Kim, W.-J. Study of CO₂ absorption by cement paste containing amine compounds. <span class="j">Innov. Infrastruct. Solut.</span> <span class="yr">2025, 10 (1), 15.</span></li>
+        <li data-cat="photo">Kim, T.-H.; Kuppusamy, M.; Park, S.-D.; <strong>Kim, S.-W.</strong>; Park, S.-S.; Kim, W.-J. Amine-functionalized carbonate mortars of CO₂ absorption for carbon neutrality and enhanced rebar corrosion resistance. <span class="j">Int. J. Civ. Eng.</span> <span class="yr">2025, 23 (3), 599.</span></li>
+        <li data-cat="photo"><strong>Kim, S. W.</strong>; Hou, Y.; Madhan, K.; Senthilkumar, K.; Kim, H.-S.; Kim, W.-J. Sol–gel nano TiO₂ synthesis using TTIP: latest trends, a comprehensive review of attribute optimization and various applications. <span class="j">Mater. Today</span> <span class="yr">2025, 88, 457.</span></li>
+        <li data-cat="fluoride"><strong>Kim, S. W.</strong> Crystal structure of Ba₆Cd₁₂Mn₄SiF₄₈. <span class="j">Z. Kristallogr. – New Cryst. Struct.</span> <span class="yr">2024, 239 (3), 543.</span></li>
+        <li data-cat="fluoride"><strong>Kim, S. W.</strong>; Chang, H. Y. Crystal structure of new barium manganese fluoride dihydrate, Ba₁₀Mn₂F₂₅·2H₂O. <span class="j">Z. Kristallogr. – New Cryst. Struct.</span> <span class="yr">2024, 240 (1), 49.</span></li>
+        <li data-cat="photo">Kuppusamy, M.; <strong>Kim, S.-W.</strong>; Lee, K.-P.; Jo, Y. J.; Kim, W.-J. Development of TiO₂–CaCO₃ based composites as an affordable building material for the photocatalytic abatement of hazardous NO<sub>x</sub>. <span class="j">Nanomaterials</span> <span class="yr">2024, 14 (2), 136.</span></li>
+        <li data-cat="fluoride">Seo, J. M.; Jo, H.; Choi, M. H.; Ok, K. M.; Chang, H. Y.; <strong>Kim, S. W.</strong> Polymorphisms in M²⁺AlF₅(H₂O)₇ (M²⁺ = Fe²⁺, Co²⁺, Ni²⁺): syntheses, crystal structures and characterization. <span class="j">Crystals</span> <span class="yr">2024, 14 (2), 197.</span></li>
+        <li data-cat="oxide"><strong>Kim, S. W.</strong>; Chang, H. Y. Structural analysis, characterization and first-principles calculations of bismuth tellurium oxides, Bi₆Te₂O₁₅. <span class="j">Crystals</span> <span class="yr">2024, 14 (1), 23.</span></li>
+        <li data-cat="photo">Kighuta, K.; <strong>Kim, S.-W.</strong>; Hou, Y.-L.; Lee, K.-P.; Kim, W.-J. Facile post-treatment ball milling strategy for low-cost TiO₂ composites with enhanced photocatalytic performance. <span class="j">Materials</span> <span class="yr">2023, 16 (14), 4931.</span></li>
+        <li data-cat="photo">Kighuta, K.; Gopalan, A.-I.; Lee, D.-G.; <strong>Kim, S.-W.</strong>; Park, S.-S.; Lee, D.-E.; Lee, K.-P.; Kim, W.-J. Novel visible-light active ternary TiO₂–ZnO–WO₃ composites. <span class="j">J. Environ. Chem. Eng.</span> <span class="yr">2022, 10 (5), 108224.</span></li>
+        <li data-cat="oxide"><strong>Kim, S. W.</strong>; Tan, X.; Frank, C. E.; Deng, Z.; Wang, H.; Collins, L.; Lapidus, S. H.; Jin, C.; Gopalan, V.; Kalinin, S. V.; Walker, D.; Greenblatt, M. High-pressure, high-temperature synthesis and characterization of polar and magnetic LuCrWO₆. <span class="j">Inorg. Chem.</span> <span class="yr">2020, 59 (6), 3579.</span></li>
+        <li data-cat="fluoride"><strong>Kim, S. W.</strong> Synthesis and characterization of a strontium iron fluoride hydrate, Sr₂Fe₂F₁₀(H₂O). <span class="j">J. Chosun Nat. Sci.</span> <span class="yr">2019, 12 (4), 101.</span></li>
+        <li data-cat="fluoride">Tan, X.; Stephens, P. W.; Hendrickx, M.; Hadermann, J.; Segre, C. U.; Croft, M.; Kang, C.-J.; Deng, Z.; Lapidus, S. H.; <strong>Kim, S. W.</strong>; Jin, C.; Kotliar, G.; Greenblatt, M. Tetragonal Cs₁.₁₇In₀.₈₁Cl₃: a charge-ordered indium halide perovskite derivative. <span class="j">Chem. Mater.</span> <span class="yr">2019, 31, 1981.</span></li>
+        <li data-cat="oxide">Deng, Z.; Retuerto, M.; Liu, S.; Croft, M.; Stephens, P. W.; Calder, S.; Li, W.; Chen, B.; Jin, C.; Hu, Z.; Li, M.-R.; Lin, H.-J.; Chan, T.-S.; Chen, C.-T.; <strong>Kim, S. W.</strong>; Greenblatt, M. Dynamic ferrimagnetic order in a highly distorted double perovskite Y₂CoRuO₆. <span class="j">Chem. Mater.</span> <span class="yr">2018, 30, 7047.</span></li>
+        <li data-cat="oxide">Yahia, G.; Damay, F.; Chattopadhyay, S.; Balédent, V.; Peng, W.; <strong>Kim, S. W.</strong>; Greenblatt, M.; Lepetit, M.-B.; Foury-Leylekian, P. Experimental evidence for the microscopic mechanism of the unusual spin-induced electric polarization in GdMn₂O₅. <span class="j">Phys. Rev. B</span> <span class="yr">2018, 97, 085128.</span></li>
+        <li data-cat="oxide"><strong>Kim, S. W.</strong>; Emge, T. J.; Deng, Z.; Uppuluri, R.; Collins, L.; Lapidus, S. H.; Segre, C. U.; Croft, M.; Jin, C.; Gopalan, V.; Kalinin, S. V.; Greenblatt, M. YCrWO₆: polar and magnetic oxide with CaTa₂O₆-related structure. <span class="j">Chem. Mater.</span> <span class="yr">2018, 30, 1045.</span></li>
+        <li data-cat="coord"><strong>Kim, S. W.</strong>; Noh, T. H.; Lee, H.; Jung, O.-S. Isomerism and cyclodimerism of (Me₄en)platinum(II) complex containing diallylmalonate ligand. <span class="j">Inorg. Chem. Commun.</span> <span class="yr">2018, 87, 40.</span></li>
+        <li data-cat="oxide"><strong>Kim, S. W.</strong>; Deng, Z.; Yu, S.; Padmanabhan, H.; Zhang, W.; Gopalan, V.; Jin, C.; Greenblatt, M. A(II)GeTeO₆ (A = Mn, Cd, Pb): noncentrosymmetric layered tellurates with PbSb₂O₆-related structure. <span class="j">Inorg. Chem.</span> <span class="yr">2017, 56, 9019.</span></li>
+        <li data-cat="oxide"><strong>Kim, S. W.</strong>; Deng, Z.; Fischer, Z.; Lapidus, S. H.; Stephens, P. W.; Li, M.-R.; Greenblatt, M. Structure and magnetic behavior of layered honeycomb tellurates, BiM(III)TeO₆ (M = Cr, Mn, Fe). <span class="j">Inorg. Chem.</span> <span class="yr">2016, 55, 10229.</span></li>
+        <li data-cat="oxide"><strong>Kim, S. W.</strong>; Emge, T. J.; Greenblatt, M. A new one-dimensional strontium vanadium tellurite, Sr₇V₄Te₁₂O₄₁. <span class="j">Acta Crystallogr. C</span> <span class="yr">2016, 72, 647.</span></li>
+        <li data-cat="oxide"><strong>Kim, S. W.</strong>; Deng, Z.; Li, M.-R.; Sen Gupta, A.; Akamatsu, H.; Gopalan, V.; Greenblatt, M. PbMn(IV)TeO₆: a new noncentrosymmetric layered honeycomb magnetic oxide. <span class="j">Inorg. Chem.</span> <span class="yr">2016, 55, 1333.</span></li>
+        <li data-cat="fluoride"><strong>Kim, S. W.</strong>; Zhang, R.; Halasyamani, P. S.; Hayward, M. A. K₄Fe₃F₁₂: an Fe²⁺/Fe³⁺ charge-ordered ferrimagnetic fluoride with a cation-deficient layered perovskite structure. <span class="j">Inorg. Chem.</span> <span class="yr">2015, 54, 6647.</span></li>
+        <li data-cat="fluoride"><strong>Kim, S. W.</strong>; Kim, S.-H.; Halasyamani, P. S.; Green, M. A.; Bhatti, K. P.; Leighton, C.; Das, H.; Fennie, C. J. RbFe²⁺Fe³⁺F₆: synthesis, structure and characterization of a new charge-ordered magnetically frustrated pyrochlore-related mixed-metal fluoride. <span class="j">Chem. Sci.</span> <span class="yr">2012, 3, 741.</span></li>
+        <li data-cat="fluoride"><strong>Kim, S. W.</strong>; Chang, H. Y.; Halasyamani, P. S. Selective pure-phase synthesis of the multiferroic BaMF₄ (M = Mg, Mn, Co, Ni, Zn) family. <span class="j">J. Am. Chem. Soc.</span> <span class="yr">2010, 132, 17684.</span></li>
+        <li data-cat="oxide">Chang, H. Y.; <strong>Kim, S. W.</strong>; Halasyamani, P. S. Polar hexagonal tungsten oxide materials: synthesis, characterization, structure–property relationships and second-harmonic generating properties. <span class="j">Chem. Mater.</span> <span class="yr">2010, 22, 3241.</span></li>
+        <li data-cat="photo">Khan, R.; <strong>Kim, S. W.</strong>; Kim, T.-J. Synthesis and control of physical properties of titania nanoparticles as a function of synthetic parameters. <span class="j">J. Nanosci. Nanotechnol.</span> <span class="yr">2008, 8, 4738.</span></li>
+        <li data-cat="photo">Khan, R.; <strong>Kim, S. W.</strong>; Kim, T.-J.; Nam, C.-M. Comparative study of the photocatalytic performance of boron–iron co-doped and boron-doped TiO₂ nanoparticles. <span class="j">Mater. Chem. Phys.</span> <span class="yr">2008, 112, 167.</span></li>
+        <li data-cat="photo"><strong>Kim, S. W.</strong>; Khan, R.; Kim, T.-J.; Kim, W.-J. Synthesis, characterization and application of Zr,S co-doped TiO₂ as a visible-light active photocatalyst. <span class="j">Bull. Korean Chem. Soc.</span> <span class="yr">2008, 29, 1217.</span></li>
+        <li data-cat="photo">Khan, R.; <strong>Kim, S. W.</strong>; Kim, T.-J.; Lee, H. A novel acid–base catalyzed sol–gel synthesis of highly active mesoporous TiO₂ photocatalysts. <span class="j">Bull. Korean Chem. Soc.</span> <span class="yr">2007, 28, 1951.</span></li>
+      </ol>
+
+      <p class="pub-note" data-ko="특허: 김태정, 김화중, 김선우. 「이산화티타늄(TiO₂) 광촉매의 제조방법 및 이에 의해 제조된 TiO₂ 광촉매」, US 2009/0286676 A1.">
+        Patent — Kim, T.-J.; Kim, W.-J.; <strong>Kim, S. W.</strong> Production method of titanium dioxide
+        (TiO₂) photocatalyst and TiO₂ photocatalyst produced by the same. US 2009/0286676 A1.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="group">
+  <div class="wrap sec">
+    <h2 data-ko="연구실">Group</h2>
+    <div class="body stack">
+      <div>
+        <p data-ko="연구책임자" style="margin-bottom:.4em">Principal investigator</p>
+        <h3 style="font-size:1.32rem;margin-bottom:.5em">Sun Woo Kim<span data-ko=" (김선우)"></span></h3>
+        <p data-ko="경북대학교 석사 과정에서 TiO₂ 광촉매로 시작했습니다. 이후 휴스턴대학교에서 P. Shiv Halasyamani 교수와 새로운 혼합금속 불화물의 수열 합성으로 박사 학위를 받았고, 지금 연구실이 쓰는 CF₃COOH 합성법이 그때 나왔습니다. 럿거스대학교에서 Martha Greenblatt 교수와 3년간 극성·자성 산화물을 다뤘고, 부산대학교에서 정옥상 교수와 백금 배위화학을 1년 더 공부했습니다.">
+          I started on TiO₂ photocatalysis as a master's student at Kyungpook National University,
+          then went to the University of Houston for a Ph.D. with P. Shiv Halasyamani on the
+          hydrothermal synthesis of new mixed-metal fluorides — the CF₃COOH route this group still
+          uses came out of that work. Three years at Rutgers with Martha Greenblatt added polar and
+          magnetic oxides; a year at Pusan National University with Ok-Sang Jung added platinum
+          coordination chemistry.
+        </p>
+        <p data-ko="2018년부터 조선대학교에서 한국연구재단 과제 두 건의 단독 연구책임자로 독립 연구실을 운영하고 있습니다. 2026년 8월부터 2027년 7월까지는 연구년으로 휴스턴대학교 화학과에서 방문학자로 연구 중입니다.">
+          Since 2018 I have run an independent group at Chosun University as sole PI on two
+          National Research Foundation of Korea grants. From August 2026 to July 2027 I am on
+          sabbatical as a visiting scholar in the Department of Chemistry at the University of
+          Houston.
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th data-ko="직위">Position</th>
+              <th data-ko="소속">Institution</th>
+              <th data-ko="기간">Years</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td data-ko="방문학자 (연구년)">Visiting Scholar, sabbatical</td><td data-ko="휴스턴대학교 화학과">University of Houston</td><td>2026–27</td></tr>
+            <tr><td data-ko="부교수">Associate Professor</td><td data-ko="조선대학교 화학교육과">Chosun University</td><td data-ko="2018–현재">2018–</td></tr>
+            <tr><td data-ko="박사후연구원">Postdoctoral Associate</td><td data-ko="부산대학교 화학과 (정옥상)">Pusan National University</td><td>2017–18</td></tr>
+            <tr><td data-ko="박사후연구원">Postdoctoral Associate</td><td data-ko="럿거스대학교 화학·화학생물학과 (Martha Greenblatt)">Rutgers University</td><td>2014–17</td></tr>
+            <tr><td data-ko="위촉연구원">Commissioned Research Scientist</td><td data-ko="포항산업과학연구원(RIST) 기능소재연구부">RIST</td><td>2009</td></tr>
+          </tbody>
+        </table>
+
+        <dl class="facts" style="margin-top:22px">
+          <div>
+            <dt data-ko="학위">Education</dt>
+            <dd data-ko="박사, 무기화학, 휴스턴대학교, 2014 — 「새로운 혼합금속 불화물의 수열 합성, 특성 분석 및 구조–물성 상관관계」 (지도교수 P. Shiv Halasyamani) · 석사, 응용화학, 경북대학교, 2008 (지도교수 김태정) · 학사, 응용화학, 경북대학교, 2006">Ph.D. Inorganic Chemistry, University of Houston, 2014 — <em>Hydrothermal Syntheses, Characterization, and Structure–Property Relationships of New Mixed Metal Fluorides</em>, with P. Shiv Halasyamani · M.Eng. Applied Chemistry, Kyungpook National University, 2008, with Tae-Jeong Kim · B.S.E. Applied Chemistry, Kyungpook National University, 2006</dd>
+          </div>
+          <div>
+            <dt data-ko="연구비">Funding</dt>
+            <dd data-ko="한국연구재단 신진연구자지원사업, 2018–2021, 단독 연구책임자 — 기능성 무기 소재의 합성과 구조–물성 상관관계 · 한국연구재단 지역대학우수과학자지원사업, 2022–현재, 단독 연구책임자 — 비선형 광학용 신규 혼합금속 할라이드">NRF of Korea, Basic Research Program for New Researchers, 2018–2021, sole PI — synthesis and structure–property relationships of functional inorganic materials · NRF Outstanding Scientist Program for Regional Universities, 2022–present, sole PI — new mixed-metal halides for nonlinear optics</dd>
+          </div>
+          <div>
+            <dt data-ko="수상">Award</dt>
+            <dd data-ko="ICDD Ludo Frevel 결정학 장학금, International Centre for Diffraction Data, 2012">ICDD Ludo Frevel Crystallography Scholarship, International Centre for Diffraction Data, 2012</dd>
+          </div>
+          <div>
+            <dt data-ko="학회 활동">Service</dt>
+            <dd data-ko="대한화학회 교육·홍보 담당 이사, 2026–2027">Director for Education and Outreach, Korean Chemical Society, 2026–2027</dd>
+          </div>
+          <div>
+            <dt>ORCID</dt>
+            <dd><a href="https://orcid.org/0000-0003-1057-2283">0000-0003-1057-2283</a></dd>
+          </div>
+        </dl>
+      </div>
+
+      <div>
+        <p data-ko="구성원" style="margin-bottom:.4em">Members</p>
+        <dl class="facts">
+          <div>
+            <dt data-ko="대학원생">Graduate students</dt>
+            <dd data-ko="이지형, 배태호">Ji-Hyeong Lee, Tae-Ho Bae</dd>
+          </div>
+          <div>
+            <dt data-ko="학부 연구원">Undergraduate researchers</dt>
+            <dd data-ko="김태희, 장예지, 오정윤, 장요원, 박승현, 김보미, 정예은 외">Tae-Hee Kim, Ye-Ji Jang, Jeong-Yun Oh, Yo-Won Jang, Seung-Hyun Park, Bo-Mi Kim, Ye-Eun Jeong and others</dd>
+          </div>
+          <div>
+            <dt data-ko="졸업생">Alumni</dt>
+            <dd data-ko="김윤수, 김서영, 서준민 — 서준민은 M²⁺AlF₅(H₂O)₇ 다형성 논문(<em>Crystals</em> 2024)의 제1저자입니다.">Yun-Su Kim, Seo-Young Kim, Jun-Min Seo — Jun-Min Seo is first author on the M²⁺AlF₅(H₂O)₇ polymorphism paper, <em>Crystals</em> 2024.</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="card">
+        <h3 data-ko="학부 연구원을 찾습니다">Looking for undergraduate researchers</h3>
+        <p data-ko="한 학기 안에 자기 손으로 결정을 키우고, 그 결정의 회절 데이터를 직접 측정하고, 구조를 풀어 보게 됩니다. 네 갈래 연구 모두 합성 한 가지와 분석 장비 한두 가지만 익히면 한두 학기 안에 논문에 실릴 만한 완결된 조각 하나를 맡을 수 있도록 쪼개 두었습니다. 합성 한 건, 지시화할 회절 패턴 하나, 해석할 스펙트럼 하나가 그 단위입니다.">
+          Within a semester you will grow your own crystals, collect diffraction data on them and
+          solve the structure yourself. All four directions are cut into pieces sized so that a
+          student who has learned one synthesis method and one or two characterisation tools can
+          finish a complete, publishable part of a larger project in a semester or two — one
+          synthesis, one diffraction pattern to index, one spectrum to interpret.
+        </p>
+        <p data-ko="지금까지 학부 연구원이 제1저자나 공저자로 참여한 논문이 여러 편 있습니다. 화학교육과가 아니어도 괜찮습니다. 관심 있으면 메일로 연락 주세요.">
+          Undergraduates from the group appear as authors on several of the papers listed above.
+          You do not have to be a chemistry-education major — email me.
+        </p>
+      </div>
+
+      <div>
+        <p data-ko="연구실에서 배우게 되는 기법:" style="margin-bottom:.4em">What you learn here:</p>
+        <dl class="facts">
+          <div>
+            <dt data-ko="합성">Synthesis</dt>
+            <dd data-ko="고상(세라믹) 반응, 수열·용매열 합성, 졸–겔, 공침, 플럭스 단결정 성장">Solid-state (ceramic) reaction, hydrothermal and solvothermal synthesis, sol–gel, co-precipitation, flux and single-crystal growth</dd>
+          </div>
+          <div>
+            <dt data-ko="구조 분석">Structure</dt>
+            <dd data-ko="분말·단결정 X-선 회절 (실험실 및 방사광), 리트벨트 정밀화">Powder and single-crystal X-ray diffraction, in the lab and at synchrotrons; Rietveld refinement</dd>
+          </div>
+          <div>
+            <dt data-ko="물성 측정">Properties</dt>
+            <dd data-ko="SEM/EDX, XPS, 확산반사 UV–Vis, FT-IR, BET 비표면적, 자화 측정, 이차조화파 발생, 광발광 분광, 열중량 분석">SEM/EDX, XPS, diffuse-reflectance UV–Vis, FT-IR, BET surface area, magnetometry, second-harmonic generation, photoluminescence spectroscopy, thermogravimetric analysis</dd>
+          </div>
+          <div>
+            <dt data-ko="반응 평가">Reaction testing</dt>
+            <dd data-ko="기체 크로마토그래피를 이용한 휘발성 유기화합물 분해 측정, 모의 태양광 하에서의 수소 발생 측정, 산 침출과 선택적 침전">Volatile organic compound degradation followed by gas chromatography, hydrogen evolution under simulated sunlight, acid leaching and selective precipitation</dd>
+          </div>
+          <div>
+            <dt data-ko="계산">Computation</dt>
+            <dd data-ko="제일원리(DFT) 전자구조 계산, 그리고 데이터가 쌓이는 대로 합성 조건 예측을 위한 기계학습">First-principles (DFT) electronic-structure calculation, and machine learning for synthesis prediction as the data accumulate</dd>
+          </div>
+        </dl>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="teaching">
+  <div class="wrap sec">
+    <h2 data-ko="강의">Teaching</h2>
+    <div class="body">
+      <p data-ko="2018년부터 화학교육과의 핵심 교과 대부분을 강의해 왔습니다. 일반화학 I·II와 실험, 무기화학 I·II와 실험, 분석화학과 실험, 배위화학, 그리고 대학원 무기·고체화학 특강입니다. 한 과목이 아니라 강의와 실험이 이어지는 전체 과정을 맡아 왔습니다.">
+        Since 2018 I have taught most of the core curriculum in the department: General Chemistry I
+        and II with their laboratories, Inorganic Chemistry I and II with laboratory, Analytical
+        Chemistry with laboratory, Coordination Chemistry, and graduate special-topics courses in
+        inorganic and solid-state chemistry. That is the full lecture-and-laboratory sequence a
+        department depends on, not a single specialty course.
+      </p>
+      <p data-ko="무기화학 강의는 원자 구조와 주기적 경향에서 시작해 산·염기와 산화·환원, 배위화학과 결정장 이론, 분자 궤도함수 이론, 유기금속화학을 거쳐 고체화학과 그 응용 — 전지, 연료전지, 형광체, 불균일 촉매, 나노재료 — 으로 마무리합니다. 토론과 문제 중심 수업으로 기본 원리를 현재의 재료화학 연구와 연결하려 합니다.">
+        The inorganic sequence runs from atomic structure and periodic trends through acid–base and
+        redox chemistry, coordination chemistry and crystal-field theory, molecular orbital theory
+        and organometallics, to solid-state chemistry and its applications — batteries, fuel cells,
+        phosphors, heterogeneous catalysis, nanomaterials. Discussion- and problem-based teaching
+        throughout, to tie the principles to current materials research.
+      </p>
+
+      <details>
+        <summary data-ko="전체 담당 과목">Full list of courses taught</summary>
+        <table>
+          <thead>
+            <tr>
+              <th data-ko="과목">Course</th>
+              <th data-ko="과정">Level</th>
+              <th data-ko="연도">Years</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td data-ko="일반화학 I / 실험 I">General Chemistry I / Laboratory I</td><td data-ko="학부">Undergrad</td><td>2018–2025</td></tr>
+            <tr><td data-ko="일반화학 II / 실험 II">General Chemistry II / Laboratory II</td><td data-ko="학부">Undergrad</td><td>2018–2025</td></tr>
+            <tr><td data-ko="일반화학 (비전공) / 실험">General Chemistry, non-majors / Laboratory</td><td data-ko="학부">Undergrad</td><td>2018–2019</td></tr>
+            <tr><td data-ko="무기화학 I">Inorganic Chemistry I</td><td data-ko="학부">Undergrad</td><td>2018–2026</td></tr>
+            <tr><td data-ko="무기화학 II">Inorganic Chemistry II</td><td data-ko="학부">Undergrad</td><td>2018–2025</td></tr>
+            <tr><td data-ko="무기화학 실험">Inorganic Chemistry Laboratory</td><td data-ko="학부">Undergrad</td><td>2018–2025</td></tr>
+            <tr><td data-ko="분석화학 / 분석화학 실험">Analytical Chemistry / Laboratory</td><td data-ko="학부">Undergrad</td><td>2018–2024</td></tr>
+            <tr><td data-ko="배위화학">Coordination Chemistry</td><td data-ko="학부·대학원">Undergrad / Grad</td><td>2020</td></tr>
+            <tr><td data-ko="과학수학">Mathematics for Science</td><td data-ko="학부">Undergrad</td><td>2021–2024</td></tr>
+            <tr><td data-ko="환경과학교육">Environmental Science Education</td><td data-ko="학부">Undergrad</td><td>2019</td></tr>
+            <tr><td data-ko="화학교육 현장실습">Chemistry Education Practicum</td><td data-ko="학부">Undergrad</td><td>2024–2026</td></tr>
+            <tr><td data-ko="고급 무기화학">Advanced Inorganic Chemistry</td><td data-ko="대학원">Graduate</td><td>2018–2026</td></tr>
+            <tr><td data-ko="무기화학 특강">Special Topics in Inorganic Chemistry</td><td data-ko="대학원">Graduate</td><td>2019–2025</td></tr>
+            <tr><td data-ko="고체화학 특강">Special Topics in Solid-State Chemistry</td><td data-ko="대학원">Graduate</td><td>2020, 2025</td></tr>
+            <tr><td data-ko="배위화학 특강">Special Topics in Coordination Chemistry</td><td data-ko="대학원">Graduate</td><td>2022, 2024</td></tr>
+          </tbody>
+        </table>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap sec">
+    <h2 data-ko="연락처">Contact</h2>
+    <div class="body">
+      <dl class="facts">
+        <div>
+          <dt data-ko="이메일">Email</dt>
+          <dd><a href="mailto:swookim@chosun.ac.kr">swookim@chosun.ac.kr</a></dd>
+        </div>
+        <div>
+          <dt data-ko="전화">Phone</dt>
+          <dd>+82-62-230-7361</dd>
+        </div>
+        <div>
+          <dt data-ko="2027년 7월까지">Through July 2027</dt>
+          <dd data-ko="미국 텍사스주 휴스턴, 휴스턴대학교 화학과">Department of Chemistry, University of Houston, Houston, TX 77204, USA</dd>
+        </div>
+        <div>
+          <dt data-ko="상시 주소">Permanent</dt>
+          <dd data-ko="광주광역시 동구 조선대길 146, 조선대학교 화학교육과 (61452)">Department of Chemistry Education, Chosun University, 146 Chosundae-gil, Dong-gu, Gwangju 61452, Republic of Korea</dd>
+        </div>
+        <div>
+          <dt>ORCID</dt>
+          <dd><a href="https://orcid.org/0000-0003-1057-2283">0000-0003-1057-2283</a></dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> <span data-ko="고체화학 연구실 · 김선우">Solid-State Chemistry Laboratory · Sun Woo Kim</span></span>
+    <span data-ko="조선대학교 화학교육과">Department of Chemistry Education, Chosun University</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ---------- hero: honeycomb layer with two ordered cation sites ---------- */
+(function(){
+  const svg = document.getElementById('lattice');
+  if(!svg) return;
+  const NS = 'http://www.w3.org/2000/svg';
+  const R = 30, cx = 150, cy = 150;
+  const key = p => Math.round(p[0]*10)/10 + ':' + Math.round(p[1]*10)/10;
+  const verts = new Map(), edges = new Map();
+
+  function hexAt(x, y){
+    const pts = [];
+    for(let i = 0; i < 6; i++){
+      const a = Math.PI/180 * (60*i - 30);
+      pts.push([x + R*Math.cos(a), y + R*Math.sin(a)]);
+    }
+    const d = 'M' + pts.map(p => p[0].toFixed(2)+','+p[1].toFixed(2)).join('L') + 'Z';
+    const path = document.createElementNS(NS,'path');
+    path.setAttribute('d', d);
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke','#1F2A2C');
+    path.setAttribute('stroke-width','1');
+    path.setAttribute('stroke-opacity','.32');
+    svg.appendChild(path);
+    pts.forEach((p,i) => {
+      verts.set(key(p), p);
+      const q = pts[(i+1)%6];
+      edges.set([key(p),key(q)].sort().join('|'), [p,q]);
+    });
+  }
+
+  const w = Math.sqrt(3)*R, h = 1.5*R;
+  for(let row = -2; row <= 2; row++){
+    for(let col = -2; col <= 2; col++){
+      const x = cx + col*w + (row % 2 ? w/2 : 0);
+      const y = cy + row*h;
+      if(Math.hypot(x-cx, y-cy) < 118) hexAt(x, y);
+    }
+  }
+
+  /* two alternating cation sites — the B / B' ordering */
+  const colors = ['#5E8A6E','#6A4A7C'];
+  let i = 0;
+  const dots = [];
+  [...verts.values()]
+    .sort((a,b) => Math.hypot(a[0]-cx,a[1]-cy) - Math.hypot(b[0]-cx,b[1]-cy))
+    .forEach(p => {
+      const c = document.createElementNS(NS,'circle');
+      c.setAttribute('cx', p[0].toFixed(2));
+      c.setAttribute('cy', p[1].toFixed(2));
+      c.setAttribute('r','4.2');
+      c.setAttribute('fill', colors[(Math.round(p[1]/h) + Math.round(p[0]/w) + i++) % 2]);
+      svg.appendChild(c);
+      dots.push(c);
+    });
+
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(still) return;
+  dots.forEach((c, n) => {
+    c.style.opacity = '0';
+    c.style.transition = 'opacity .5s ease';
+    setTimeout(() => { c.style.opacity = '1'; }, 260 + n*22);
+  });
+})();
+
+/* ---------- publication filter ---------- */
+(function(){
+  const chips = document.querySelectorAll('.chip');
+  const items = document.querySelectorAll('#publist li');
+  chips.forEach(chip => chip.addEventListener('click', () => {
+    const f = chip.dataset.filter;
+    chips.forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
+    items.forEach(li => li.classList.toggle('hide', f !== 'all' && li.dataset.cat !== f));
+  }));
+})();
+
+/* ---------- Korean / English ---------- */
+(function(){
+  const btn = document.getElementById('lang');
+  let ko = false;
+  btn.addEventListener('click', () => {
+    ko = !ko;
+    document.querySelectorAll('[data-ko]').forEach(el => {
+      if(!el.dataset.en) el.dataset.en = el.innerHTML;
+      el.innerHTML = ko ? el.dataset.ko : el.dataset.en;
+    });
+    document.documentElement.lang = ko ? 'ko' : 'en';
+    btn.textContent = ko ? 'English' : '한국어';
+  });
+})();
+</script>
+</body>
+</html>
