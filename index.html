@@ -10,11 +10,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#ECEDE7;
-  --paper-2:#E3E5DD;
+  --paper:#FFFFFF;
+  --paper-2:#F4F5F0;
   --ink:#1F2A2C;
   --muted:#5C6664;
-  --rule:#CBCFC5;
+  --rule:#DFE2DA;
   --fluoride:#456D53;
   --oxide:#553768;
   --photo:#83521E;
@@ -47,7 +47,7 @@ p:last-child{margin-bottom:0}
 /* ---------- top bar ---------- */
 .bar{
   position:sticky;top:0;z-index:20;
-  background:rgba(236,237,231,.93);
+  background:rgba(255,255,255,.94);
   backdrop-filter:blur(8px);
   border-bottom:1px solid var(--rule);
 }
@@ -73,8 +73,8 @@ p:last-child{margin-bottom:0}
 .hero-figure{margin:46px 0 0}
 .hero-figure img{width:100%;height:auto;display:block;border-radius:2px}
 .hero-figure figcaption{
-  font-family:"Archivo",sans-serif;font-size:12.5px;line-height:1.55;
-  color:var(--muted);margin-top:12px;max-width:74ch}
+  font-size:.875rem;line-height:1.68;color:var(--muted);
+  margin-top:14px;max-width:var(--measure);text-wrap:pretty}
 
 /* ---------- section scaffold ---------- */
 section{padding:56px 0;border-bottom:1px solid var(--rule)}
@@ -116,8 +116,10 @@ section{padding:56px 0;border-bottom:1px solid var(--rule)}
 
 .thread figure img{width:100%;height:auto;display:block;border-radius:2px}
 .thread figcaption{
-  font-family:"Archivo",sans-serif;font-size:12.5px;line-height:1.55;
-  color:var(--muted);margin-top:10px;max-width:60ch}
+  font-size:.875rem;line-height:1.68;color:var(--muted);
+  margin-top:14px;max-width:58ch;text-wrap:pretty}
+.figure-row figcaption{margin-top:12px;max-width:none}
+.cap-name{color:var(--ink)}
 .thread .keys{font-family:"Archivo",sans-serif;font-size:12.5px;color:var(--muted);margin-top:.8em}
 
 /* ---------- publications ---------- */
@@ -307,16 +309,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
           <figure>
             <img src="zr3oh2f10-crystals.png"
                  alt="Optical micrograph of small colourless block-shaped crystals; one near the lower left is marked with a red dashed circle.">
-            <figcaption data-ko="Zr₃(OH)₂F₁₀. 붉은 원으로 표시한 결정을 단결정 X-선 회절 데이터 수집에 사용했습니다.">
-              Zr₃(OH)₂F₁₀. The crystal in the red circle is the one used for single-crystal
+            <figcaption data-ko="<span class=&quot;cap-name&quot;>Zr₃(OH)₂F₁₀</span>. 붉은 원으로 표시한 결정을 단결정 X-선 회절 데이터 수집에 사용했습니다.">
+              <span class="cap-name">Zr₃(OH)₂F₁₀</span>. The crystal in the red circle is the one used for single-crystal
               X-ray data collection.
             </figcaption>
           </figure>
           <figure>
             <img src="pb15fe3f12-crystals.jpg"
                  alt="Optical micrograph of angular crystals, many of them triangular plates, against a yellow field.">
-            <figcaption data-ko="Pb₁.₅Fe₃F₁₂·3H₂O. 오토클레이브에서 나온 생성물 중에서 손으로 골라낸 결정입니다.">
-              Pb₁.₅Fe₃F₁₂·3H₂O, hand-sorted from the products recovered from the autoclave.
+            <figcaption data-ko="<span class=&quot;cap-name&quot;>Pb₁.₅Fe₃F₁₂·3H₂O</span>. 오토클레이브에서 나온 생성물 중에서 손으로 골라낸 결정입니다.">
+              <span class="cap-name">Pb₁.₅Fe₃F₁₂·3H₂O</span>, hand-sorted from the products recovered from the autoclave.
             </figcaption>
           </figure>
         </div>
