@@ -736,6 +736,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="wrap">
     <span>© <span id="yr">2026</span> <span data-ko="고체화학 연구실 · 김선우">Solid-State Chemistry Laboratory · Sun Woo Kim</span></span>
     <span data-ko="조선대학교 화학교육과">Department of Chemistry Education, Chosun University</span>
+    <span id="visits" hidden></span>
   </div>
 </footer>
 
@@ -770,15 +771,31 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 </script>
 
 <!-- ── Visitor analytics (GoatCounter) ────────────────────────────────────
-     Cookie-free, GDPR-friendly. No consent banner required.
-     SETUP: replace MYCODE below with the site code you choose when you
-     sign up at https://www.goatcounter.com  (e.g. "swookim" →
-     https://swookim.goatcounter.com/count.js).  Until then this line does
-     nothing and the page works normally.
-     Dashboard with per-country totals: https://MYCODE.goatcounter.com
+     Cookie-free, no personal data stored, GDPR-friendly; no consent banner needed.
+     Dashboard (visits, countries, referrers): https://swookim1002.goatcounter.com
 -->
-<script data-goatcounter="https://MYCODE.goatcounter.com/count"
+<script data-goatcounter="https://swookim1002.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+
+<!-- Show the running visit total in the footer.
+     Requires Settings → "Allow adding visitor counts to the website" on
+     https://swookim1002.goatcounter.com. Fails silently if unavailable. -->
+<script>
+(function(){
+  var el = document.getElementById('visits');
+  if(!el) return;
+  fetch('https://swookim1002.goatcounter.com/counter/TOTAL.json')
+    .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
+    .then(function(d){
+      var n = d.count_unique || d.count;
+      if(!n) return;
+      el.textContent = n + ' visitors';
+      el.dataset.ko = n + '\uBA85 \uBC29\uBB38';
+      el.hidden = false;
+    })
+    .catch(function(){});
+})();
+</script>
 
 </body>
 </html>
